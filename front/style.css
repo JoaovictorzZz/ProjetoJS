@@ -150,6 +150,7 @@ header {
     width: 80%;
     text-align: center;
     border-radius: 10px;
+    font-size: 60px;
 }
 
 .close {
@@ -166,3 +167,4 @@ header {
     text-decoration: none;
     cursor: pointer;
 }
+

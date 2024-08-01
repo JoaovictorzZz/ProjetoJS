@@ -59,3 +59,17 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 });
+
+function aparecer(fileName) {
+    fetch(fileName)
+        .then(response => response.text())
+        .then(scriptContent => {
+            const exerciseDisplay = document.getElementById('exerciseDisplay');
+            exerciseDisplay.textContent = scriptContent;
+            // Opcional: Executar o script
+            // eval(scriptContent);
+        })
+        .catch(error => {
+            console.error('Erro ao carregar o exercício:', error);
+        });
+}
