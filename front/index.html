@@ -34,19 +34,403 @@
             <button class="tab-button" data-content="content9" onclick="aparecer('ex9.js')">Exercício 9</button>
             <button class="tab-button" data-content="content10" onclick="aparecer('')">Exercício 10</button>
         </div>
-        
+
+        <!--exercicio 1 -->
+
         <div class="tab-content" id="content1">
-            Conteúdo do Exercício 1
+            <h1>Vereficar se e par ou impar </h1>
+            <input type="number" id="number"/>
+            <button onclick="verificar()">Vereficar</button>
+            <script>
+                function verificar(){
+                    var num = document.getElementById('number').value
+
+                    var number = Number(num)
+                    if(number % 2 == 0){
+                        alert("esse numero e par")
+                    }else{
+                        alert('este numero e impar')
+                    }
+                }
+            </script>
         </div>
-        <div class="tab-content" id="content2">Conteúdo do Exercício 2</div>
-        <div class="tab-content" id="content3">Conteúdo do Exercício 3</div>
-        <div class="tab-content" id="content4">Conteúdo do Exercício 4</div>
-        <div class="tab-content" id="content5">Conteúdo do Exercício 5</div>
-        <div class="tab-content" id="content6">Conteúdo do Exercício 6</div>
-        <div class="tab-content" id="content7">Conteúdo do Exercício 7</div>
-        <div class="tab-content" id="content8">Conteúdo do Exercício 8</div>
-        <div class="tab-content" id="content9">Conteúdo do Exercício 9</div>
-        <div class="tab-content" id="content10">Conteúdo do Exercício 10</div>
+
+        <!--exercicio 2 -->
+
+        <div class="tab-content" id="content2">
+            <h2>Qual numero e maior </h2>
+            <label for="num1">Número 1:</label>
+    <input type="number" id="num1"><br>
+
+    <label for="num2">Número 2:</label>
+    <input type="number" id="num2"><br>
+
+    <label for="num3">Número 3:</label>
+    <input type="number" id="num3"><br>
+
+    <button onclick="verificarMaiorNumero()">Verificar</button>
+
+    <p id="resultado"></p>
+            <script>
+                function maiorNumero(a, b, c) {
+            if (a >= b && a >= c) {
+                return a;
+            } else if (b >= a && b >= c) {
+                return b;
+            } else {
+                return c;
+            }
+        }
+
+        function verificarMaiorNumero() {
+            const num1 = parseFloat(document.getElementById('num1').value);
+            const num2 = parseFloat(document.getElementById('num2').value);
+            const num3 = parseFloat(document.getElementById('num3').value);
+
+            const maior = maiorNumero(num1, num2, num3);
+
+            document.getElementById('resultado').textContent = `O maior número é: ${maior}`;
+        }
+            </script>
+        </div>
+
+<!--exercicio 3 -->
+
+        <div class="tab-content" id="content3">
+            <label for="idade">Digite sua idade:</label>
+    <input type="number" id="idade" min="0" step="1"><br>
+
+    <button onclick="verificarClassificacao()">Verificar</button>
+
+    <p id="resultado"></p>
+            <script>
+                 function classificarIdade(idade) {
+            if (idade >= 0 && idade <= 12) {
+                return "Criança";
+            } else if (idade >= 13 && idade <= 17) {
+                return "Adolescente";
+            } else if (idade >= 18 && idade <= 64) {
+                return "Adulto";
+            } else if (idade >= 65) {
+                return "Idoso";
+            } else {
+                return "Idade inválida";
+            }
+        }
+
+        function verificarClassificacao() {
+            const idade = parseInt(document.getElementById('idade').value, 10);
+            const classificacao = classificarIdade(idade);
+
+            document.getElementById('resultado').textContent = `Classificação: ${classificacao}`;
+        }
+            </script>
+        </div>
+<!--Exercicio4 -->
+        <div class="tab-content" id="content4">
+            <h1>Contagem Regressiva</h1>
+    <label for="duracao">Duração (em segundos):</label>
+    <input type="number" id="duracao" min="1" step="1"><br>
+
+    <button onclick="iniciar()">Iniciar</button>
+
+    <div id="contador">00:00</div>
+            <script>
+                function iniciarContagemRegressiva(duracao) {
+            let tempoRestante = duracao * 1000; // Convertendo segundos para milissegundos
+            const display = document.getElementById('contador');
+
+            function atualizarContador() {
+                const minutos = Math.floor(tempoRestante / (60 * 1000));
+                const segundos = Math.floor((tempoRestante % (60 * 1000)) / 1000);
+
+                display.textContent = `${String(minutos).padStart(2, '0')}:${String(segundos).padStart(2, '0')}`;
+
+                if (tempoRestante <= 0) {
+                    clearInterval(intervalo);
+                    display.textContent = 'Tempo Esgotado!';
+                } else {
+                    tempoRestante -= 1000;
+                }
+            }
+
+            const intervalo = setInterval(atualizarContador, 1000);
+            atualizarContador(); // Atualiza imediatamente ao iniciar
+        }
+
+        function iniciar() {
+            const duracao = parseInt(document.getElementById('duracao').value, 10);
+            if (!isNaN(duracao) && duracao > 0) {
+                iniciarContagemRegressiva(duracao);
+            } else {
+                alert('Por favor, insira uma duração válida em segundos.');
+            }
+        }
+            </script>
+
+        </div>
+        <!--Exercicio5 -->
+        <div class="tab-content" id="content5">
+            <h1>Limitador de Valor</h1>
+    <label for="numero">Digite um número (entre 1 e 100):</label>
+    <input type="number" id="numero">
+         <script>
+             function limitarValor() {
+            const input = document.getElementById('numero');
+            const min = 1;
+            const max = 100;
+            input.addEventListener('input', function() {
+                let value = parseInt(this.value, 10);
+                if (value < min) {
+                    this.value = min;
+                } else if (value > max) {
+                    this.value = max;
+                }
+            });
+        }
+         </script>
+        </div>
+        <!--Exercicio6 -->
+        <div class="tab-content" id="content6">
+            <style>
+                .calculadora {
+            margin: auto;
+            text-align: center;      
+            width: 500px;        
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .display {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            text-align: right;
+            background-color: #f9f9f9;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 5px;
+        }
+        .button {
+            padding: 20px;
+            font-size: 1.2em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #e0e0e0;
+        }
+        .button.operator {
+            background-color: #f0f0f0;
+        }
+        .button.operator:hover {
+            background-color: #d0d0d0;
+        }
+        .button.double {
+            grid-column: span 2;
+        }
+            </style>
+            <div class="calculadora">
+                <div id="display" class="display">0</div>
+                <div class="buttons">
+                    <div class="button double" onclick="clearDisplay()">C</div>
+                    <div class="button operator" onclick="appendToDisplay('/')">/</div>
+                    <div class="button operator" onclick="appendToDisplay('*')">*</div>
+                    <div class="button operator" onclick="appendToDisplay('-')">-</div>
+        
+                    <div class="button" onclick="appendToDisplay('7')">7</div>
+                    <div class="button" onclick="appendToDisplay('8')">8</div>
+                    <div class="button" onclick="appendToDisplay('9')">9</div>
+                    <div class="button operator" onclick="appendToDisplay('+')">+</div>
+        
+                    <div class="button" onclick="appendToDisplay('4')">4</div>
+                    <div class="button" onclick="appendToDisplay('5')">5</div>
+                    <div class="button" onclick="appendToDisplay('6')">6</div>
+                    <div class="button double operator" onclick="calculateResult()">=</div>
+        
+                    <div class="button" onclick="appendToDisplay('1')">1</div>
+                    <div class="button" onclick="appendToDisplay('2')">2</div>
+                    <div class="button" onclick="appendToDisplay('3')">3</div>
+                    <div class="button double" onclick="appendToDisplay('0')">0</div>
+                    <div class="button" onclick="appendToDisplay('.')">.</div>
+                </div>
+            </div>
+
+            <script>
+function appendToDisplay(value) {
+            const display = document.getElementById('display');
+            if (display.textContent === '0' || display.textContent === 'Error') {
+                display.textContent = value;
+            } else {
+                display.textContent += value;
+            }
+        }
+
+        function clearDisplay() {
+            document.getElementById('display').textContent = '0';
+        }
+
+        function calculateResult() {
+            const display = document.getElementById('display');
+            try {
+                // Avalia a expressão matemática
+                const result = eval(display.textContent);
+                display.textContent = result;
+            } catch (e) {
+                display.textContent = 'Error';
+            }
+        }
+
+            </script>
+        </div>
+        
+        <!--Exercicio7 -->
+        <div class="tab-content" id="content7">
+            <div class="container">
+                <h1>Soma de Elementos do Array </h1>
+                <label for="numeros">  Digite números separados por vírgula:</label>
+                <input type="text" id="numeros" placeholder="Exemplo: 1,2,3,4,5">
+                <button onclick="calcularSoma()">Calcular Soma</button>
+                <div id="resultado"></div>
+            </div>
+
+        </div>
+        <script>
+             function calcularSoma() {
+            const input = document.getElementById('numeros').value;
+            const resultadoDiv = document.getElementById('resultado');
+
+            // Separar a string em um array de números
+            const numeros = input.split(',').map(num => parseFloat(num.trim())).filter(num => !isNaN(num));
+
+            // Calcular a soma dos elementos do array
+            const soma = numeros.reduce((acc, num) => acc + num, 0);
+
+            // Exibir o resultado
+            resultadoDiv.textContent = `Soma: ${soma}`;
+        }
+        </script>
+
+        <!--Exercicio8 -->
+        <div class="tab-content" id="content8">
+            <div class="container">
+                <h1>Inverter Array</h1>
+                <label for="numeros">Digite números separados por vírgula:</label>
+                <input type="text" id="numeros" placeholder="Exemplo: 1,2,3,4,5">
+                <button onclick="inverterArray()">Inverter Array</button>
+                <div id="resultado"></div>
+            </div>
+        </div>
+        <script>
+            function inverterArray() {
+            const input = document.getElementById('numeros').value;
+            const resultadoDiv = document.getElementById('resultado');
+
+            // Separar a string em um array de elementos
+            const array = input.split(',').map(item => item.trim()).filter(item => item.length > 0);
+
+            // Inverter o array
+            const arrayInvertido = array.reverse();
+
+            // Exibir o array invertido
+            resultadoDiv.textContent = `Array Invertido: ${arrayInvertido.join(', ')}`;
+        }
+        </script>
+        <!--Exercicio9 -->
+        
+        <div class="tab-content" id="content9">
+            
+            <div class="container">
+                <h1>Lista de Itens</h1>
+                <input type="text" id="itemInput" placeholder="Digite um item">
+                <button onclick="adicionarItem()">Adicionar Item</button>
+                <ul id="listaItens"></ul>
+            </div>
+        </div>
+        <script>
+            function adicionarItem() {
+            const input = document.getElementById('itemInput');
+            const itemText = input.value.trim();
+            if (itemText === '') {
+                alert('Por favor, digite um item.');
+                return;
+            }
+
+            // Criar um novo item de lista
+            const li = document.createElement('li');
+            li.textContent = itemText;
+
+            // Criar botão de remover
+            const removeButton = document.createElement('button');
+            removeButton.textContent = 'Remover';
+            removeButton.className = 'remove';
+            removeButton.onclick = function() {
+                li.remove();
+            };
+
+            // Adicionar o botão de remover ao item da lista
+            li.appendChild(removeButton);
+
+            // Adicionar o item à lista
+            document.getElementById('listaItens').appendChild(li);
+
+            // Limpar o campo de entrada
+            input.value = '';
+        }
+        </script>
+        <!--Exercicio10 -->
+        <div class="tab-content" id="content10">
+            <div class="container">
+                <h1>Criação e Exibição de Matriz</h1>
+                <label for="linhas">Número de Linhas:</label>
+                <input type="number" id="linhas" min="1" placeholder="Número de Linhas">
+        
+                <label for="colunas">Número de Colunas:</label>
+                <input type="number" id="colunas" min="1" placeholder="Número de Colunas">
+        
+                <button onclick="criarMatriz()">Criar Matriz</button>
+        
+                <div id="matrizContainer"></div>
+            </div>
+        </div>
+        <script>
+            function criarMatriz() {
+            const linhas = parseInt(document.getElementById('linhas').value);
+            const colunas = parseInt(document.getElementById('colunas').value);
+            const matrizContainer = document.getElementById('matrizContainer');
+
+            // Validação dos inputs
+            if (isNaN(linhas) || isNaN(colunas) || linhas < 1 || colunas < 1) {
+                alert('Por favor, insira números válidos para linhas e colunas.');
+                return;
+            }
+
+            // Criar a tabela para exibir a matriz
+            let tabela = '<table>';
+            
+            for (let i = 0; i < linhas; i++) {
+                tabela += '<tr>';
+                for (let j = 0; j < colunas; j++) {
+                    tabela += `<td>${i + 1}-${j + 1}</td>`;
+                }
+                tabela += '</tr>';
+            }
+            
+            tabela += '</table>';
+
+            // Exibir a matriz na página
+            matrizContainer.innerHTML = tabela;
+        }
+        </script>
     </div>
 
     <!-- Modal -->
@@ -63,11 +447,13 @@
     <div id="myModal" class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
-            <p>quem se mexer é gay</p>
+            <p>quem se mexer È <strong style="color:deeppink;">GAY</strong></p>
+            <img src="imgs/kakakakakka.jpg" width="1550px" height="1300px" alt="Imagem do kick" >
             <audio id="audio" src="videoplayback (3).mp3"></audio>
         </div>
     </div>
     
     <script src="script.js"></script>
+    
 </body>
 </html>

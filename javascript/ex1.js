@@ -6,5 +6,5 @@ function verificarParOuImpar(num) {
         return `${num} é ímpar.`;
     }
 }
-console.log(verificarParOuImpar(4));
+console.log(verificarParOuImpar(7));
 console.log(verificarParOuImpar(7));
